@@ -1,10 +1,13 @@
 import { ShoppingCart } from "@phosphor-icons/react";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 
 const Header = () => {
 
 const [cartVisible, setCartVisible] = useState<boolean>(false);
+const location = useLocation();
+console.log
 
 
     return(
@@ -14,18 +17,16 @@ const [cartVisible, setCartVisible] = useState<boolean>(false);
                 <HeaderLogo>LOGO</HeaderLogo>
                 <HeaderMenu>
                     <li>
-                        <a href="/">Inicio</a>
+                        <a  href="/" className={location.pathname === '/' ? "active" : ""}>Inicio</a>
                     </li>
                     <li>
-                        <a href="/cardapio">Cardápio</a>
+                        <a href="/cardapio" className={location.pathname === '/cardapio' ? "active" : ""}>Cardápio</a>
                     </li>
                     <li>
-                        <a href="/promocoes">Promoções</a>
+                        <a href="/promocoes" className={location.pathname === '/promocoes' ? "active" : ""}>Promoções </a>
                     </li>
                 </HeaderMenu>
                 </HeaderActions>
-                
-                
                 <HeaderActions>
                     <HeaderBTN href="/login">Login</HeaderBTN>
                     <ShoppingCart className="icon" size={24} 
@@ -43,11 +44,12 @@ const [cartVisible, setCartVisible] = useState<boolean>(false);
 
 const HeaderContainer = styled.header`
     width: 100%;
-    background-color: #bd0000;
+    background-color: #6b0504;
     padding: 16px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: solid #f4796b;
 
     & .icon {
         width: 50px;
@@ -74,6 +76,22 @@ const HeaderMenu = styled.ul`
         color: #ffffff;
         line-height: 40px;
         display: block;
+        position: relative;
+
+        &.active {
+            color: #f4796b;
+        }
+
+        &.active::after {
+            content: "";
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background-color: #f4796b;
+            position: absolute;
+            top: 90%;
+            left: 0;
+        }
     }
 `;
 
